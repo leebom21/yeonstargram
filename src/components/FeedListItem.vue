@@ -6,10 +6,12 @@
         <div>
           <img :src="item.User.profile" />
         </div>
-        <a href="#none"> {{ item.User.username }}</a>
-        <button class="modal">더보기</button>
+        <div>
+          <a href="#none"> {{ item.User.username }}</a>
+          <button class="modal">fdf</button>
+        </div>
       </div>
-      <div>
+      <div class="upload-image">
         <img :src="item.Photo.url" alt="게시물 이미지" />
       </div>
       <div>
@@ -42,33 +44,55 @@ export default {
 
 <style lang="scss" scoped>
 .feed-item {
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+
+  button {
+    border: none;
+    background: #fff;
+  }
   width: 100%;
   & > div {
     &:nth-child(1) {
       padding: 14px;
       border-bottom: 1px solid #ddd;
       overflow: hidden;
-      vertical-align: center;
+      display: flex;
+      align-items: center;
 
       & > div {
-        width: 32px;
-        height: 32px;
-        background: #ddd;
-        border-radius: 30px;
-        float: left;
-        vertical-align: center;
+        display: inline-block;
+        &:nth-child(1) {
+          width: 32px;
+          height: 32px;
+          background: #ddd;
+          border-radius: 50px;
+          margin-right: 15px;
 
-        img {
+          img {
+            width: 100%;
+          }
+        }
+        &:nth-child(2) {
           width: 100%;
+          display: flex;
+          justify-content: space-between;
+
+          a {
+            font-weight: 600;
+          }
         }
       }
-      a {
-        float: left;
-      }
-      button {
-        float: right;
-        border: none;
-      }
+    }
+  }
+
+  .upload-image {
+    height: 375px;
+    background: #f3f3f3;
+    img {
+      width: 100%;
     }
   }
 }
