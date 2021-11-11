@@ -1,6 +1,6 @@
 <template>
   <ul class="feed-list">
-    <FeedListItem :list="list" />
+    <FeedListItem :list="list" :listData="listData" />
   </ul>
 </template>
 
@@ -8,7 +8,7 @@
 import FeedListItem from "./FeedListItem.vue";
 export default {
   name: "FeedList",
-  props: ["list"],
+  props: ["list", "listData"],
   components: { FeedListItem },
 };
 </script>

@@ -20,7 +20,9 @@ export default {
 .main-layout {
   max-width: 450px;
   margin: 0 auto;
-  height: 100%;
+  //height: 100%;
+  background: #fff;
   position: relative;
+  border: 1px solid #eee;
 }
 </style>

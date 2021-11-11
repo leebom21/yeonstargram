@@ -3,9 +3,7 @@
     <!--스토리-->
 
     <!--리스트 뿌려주기-->
-    <div class="feed">
-      <FeedList :list="list" />
-    </div>
+    <div class="feed"><FeedList :list="list" :listData="listData" /></div>
   </div>
 </template>
 
@@ -18,6 +16,46 @@ export default {
   data() {
     return {
       list: [],
+      listData: [
+        {
+          id: 0,
+          profile: "", //프로필 이미지 경로
+          username: "leebom_test01", // 작성자 닉네임
+          url: "https://i.pinimg.com/564x/73/35/31/733531b6c100ef52159dbf1476f253a2.jpg", //게시물 이미지 경로
+          likeCount: 1,
+          date: 7,
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ligula sapien, rutrum sed vestibulum eget, rhoncus ac erat. Aliquam erat volutpat. Sed convallis scelerisque enim at fermentum.",
+        },
+        {
+          id: 1,
+          profile: "", //프로필 이미지 경로
+          username: "rkskekf", // 작성자 닉네임
+          url: "https://i.pinimg.com/736x/6e/14/cc/6e14cc16824ed8150ab77a59b2e7ff3b.jpg", //게시물 이미지 경로
+          likeCount: 7,
+          date: 3,
+          description:
+            "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.",
+        },
+        {
+          id: 2,
+          profile: "", //프로필 이미지 경로
+          username: "lalala", // 작성자 닉네임
+          url: "https://i.pinimg.com/564x/4a/df/79/4adf79a54b55ff828832636d7e3b62c9.jpg", //게시물 이미지 경로
+          likeCount: 3,
+          date: 1,
+          description: "오늘은 화요일 :)",
+        },
+        {
+          id: 3,
+          profile: "", //프로필 이미지 경로
+          username: "lalala", // 작성자 닉네임
+          url: "https://i.pinimg.com/564x/9d/02/b2/9d02b26580b242a40108589138138e6f.jpg", //게시물 이미지 경로
+          likeCount: 8,
+          date: 0,
+          description: "오늘은 수요일!!!! ",
+        },
+      ],
     };
   },
   components: { FeedList },
@@ -60,4 +98,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.feed {
+  margin-top: 47px;
+}
+</style>

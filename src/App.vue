@@ -9,7 +9,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  height: 100%;
+  //height: 100%;
 }
 p {
   padding: 0;
@@ -24,6 +24,7 @@ p {
   text-align: center;
   color: #2c3e50;
   height: 100%;
+  background-color: #fafafa;
 }
 
 #nav {
