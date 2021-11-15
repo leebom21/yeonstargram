@@ -9,7 +9,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  //height: 100%;
+  height: 100%;
 }
 p {
   padding: 0;

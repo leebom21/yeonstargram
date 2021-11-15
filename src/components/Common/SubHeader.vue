@@ -30,7 +30,8 @@ header {
   justify-content: space-between;
   padding: 0 15px;
   height: 44px;
-  border-bottom: 1px solid #e8e8e8;
+  border-bottom: 1px solid #ddd;
+  background: #fff;
 
   button {
     background: none;
