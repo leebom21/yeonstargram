@@ -1,6 +1,5 @@
 <template>
   <div class="navigation">
-    <img :src="img" />
     <div>
       <button class="home-icon">
         <svg
@@ -99,7 +98,7 @@
     <div class="mypage">
       <button>
         <div>
-          <!-- <img src="" alt="mypage" /> -->
+          <img :src="$store.state.user.userImage" alt="myprofile" />
         </div>
       </button>
     </div>
@@ -121,16 +120,13 @@ export default {
       fileReader.readAsDataURL(file);
       fileReader.onload = (e) => {
         this.img = e.target.result;
+
+        this.$store.dispatch("getUploadImg", this.img);
       };
       this.$router.push("/write");
     },
     onFilePicked(e) {
-      console.log(e.target.files);
       console.log(e);
-    },
-    //첨부
-    writeBtn() {
-      this.$router.push("/write");
     },
   },
 };
@@ -167,13 +163,12 @@ export default {
       div {
         width: 24px;
         height: 24px;
-        /* background-image: radial-gradient(
-          farthest-corner at 40px 40px,
-          #f35 0%,
-          #43e 100%
-        ); */
-        background: #bb5252;
         border-radius: 50%;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+        }
       }
     }
   }

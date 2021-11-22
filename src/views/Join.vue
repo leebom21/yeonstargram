@@ -15,12 +15,12 @@
         <div>
           <Input type="text" placeHolder="휴대폰 번호" :value.sync="phone" />
           <Input type="text" placeHolder="이메일" :value.sync="email" />
-          <Input type="text" placeHolder="비밀번호" :value.sync="password" />
           <Input
             type="password"
-            placeHolder="사용자 이름"
-            :value.sync="username"
+            placeHolder="비밀번호"
+            :value.sync="password"
           />
+          <Input type="text" placeHolder="사용자 이름" :value.sync="username" />
 
           <Button title="가입" @click="join"> </Button>
         </div>

@@ -9,18 +9,22 @@
       <template #right>{{ headerContents.button }}</template>
     </SubHeader>
     <template v-if="step === 1">
-      <div class="frame-box"></div>
+      <div class="frame-box">
+        <img :src="$store.state.uploadImg" align="center" />
+      </div>
     </template>
     <template v-if="step === 2">
       <div class="write-feed">
         <div>
           <div class="myprofile">
-            <img src="" />
+            <img :src="$store.state.user.userImage" />
           </div>
           <div class="write-text">
             <textarea placeholder="문구입력..."></textarea>
           </div>
-          <div class="upload-image"></div>
+          <div class="upload-image">
+            <img :src="$store.state.uploadImg" align="center" />
+          </div>
         </div>
         <!--위치 추가--->
         <div>
@@ -41,6 +45,7 @@
 <script>
 import Icon from "../components/Common/Icon.vue";
 import SubHeader from "../components/Common/SubHeader.vue";
+//import axios from "axios";
 
 export default {
   name: "Write",
@@ -48,6 +53,10 @@ export default {
   data() {
     return {
       step: 1,
+      description: "",
+      tag: "",
+      writer: "",
+      photo: "",
     };
   },
   methods: {
@@ -63,6 +72,16 @@ export default {
         this.step = 2;
       } else {
         //api 호출
+        // const response = await axios.post("/api/board/write", {
+        //   description,
+        //   tag,
+        //   writer: this.$store.state.user.id,
+        //   photo: data.id,
+        // });
+        // if (response.status === 200) {
+        //   this.$router.push("main");
+        // } else {
+        // }
       }
     },
   },
@@ -98,6 +117,15 @@ export default {
     width: 100%;
     height: 453px;
     background: #eee;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      //width: 100%;
+      min-height: 453px;
+      height: 100%;
+    }
   }
   .write-feed {
     & > div {
@@ -123,8 +151,12 @@ export default {
         width: 30px;
         height: 30px;
         border-radius: 30px;
-        background-color: #ddd;
+        background-color: #eee;
         display: inline-block;
+        overflow: hidden;
+        img {
+          width: 100%;
+        }
       }
 
       .write-text {
@@ -154,7 +186,14 @@ export default {
         display: inline-block;
         width: 48px;
         height: 48px;
-        background-color: #ddd;
+        background-color: #eee;
+        display: flex;
+        overflow: hidden;
+        justify-content: center;
+        align-items: center;
+        img {
+          height: 100%;
+        }
       }
     }
   }

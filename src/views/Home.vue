@@ -14,11 +14,7 @@
             <img src="../assets/images/yeon-logo.png" alt="logo" />
           </div>
           <!--input -->
-          <Input
-            :value.sync="id"
-            type="text"
-            placeHolder="전화번호, 사용자 이름 또는 이메일"
-          />
+          <Input :value.sync="id" type="text" placeHolder="이메일" />
           <Input :value.sync="pw" type="password" placeHolder="비밀번호" />
 
           <Button title="로그인" @click="login" />
@@ -103,10 +99,7 @@ export default {
     };
   },
   methods: {
-    login() {
-      this.$router.push("/main");
-    },
-    async login1() {
+    async login() {
       const response = await axios.post("/api/account/login", {
         email: this.id,
         password: this.pw,
@@ -114,6 +107,16 @@ export default {
       //console.log(response);
       if (response.status === 200) {
         this.$router.push("/main");
+      } else {
+        if (this.$store.state.user.email !== response.email) {
+          alert("메일을 다시 확인해주세요");
+          return false;
+        } else {
+          if (this.$store.state.user.password !== response.password) {
+            alert("비밀번호를 다시 확인해주세요");
+            return false;
+          }
+        }
       }
     },
   },

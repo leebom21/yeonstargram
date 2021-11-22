@@ -19,7 +19,8 @@ export default {
       listData: [
         {
           id: 0,
-          profile: "", //프로필 이미지 경로
+          profile:
+            "https://i.pinimg.com/564x/52/9f/9a/529f9aeb3d2c17476d3fa67fdec7f064.jpg", //프로필 이미지 경로
           username: "leebom_test01", // 작성자 닉네임
           url: "https://i.pinimg.com/564x/73/35/31/733531b6c100ef52159dbf1476f253a2.jpg", //게시물 이미지 경로
           likeCount: 1,
@@ -29,7 +30,8 @@ export default {
         },
         {
           id: 1,
-          profile: "", //프로필 이미지 경로
+          profile:
+            "https://i.pinimg.com/564x/e6/3f/64/e63f64a6ff3895ccb4fa6399b7acbfdd.jpg", //프로필 이미지 경로
           username: "rkskekf", // 작성자 닉네임
           url: "https://i.pinimg.com/736x/6e/14/cc/6e14cc16824ed8150ab77a59b2e7ff3b.jpg", //게시물 이미지 경로
           likeCount: 7,
@@ -39,7 +41,8 @@ export default {
         },
         {
           id: 2,
-          profile: "", //프로필 이미지 경로
+          profile:
+            "https://i.pinimg.com/564x/41/88/a5/4188a5bc471ab4797417813e5b039c60.jpg", //프로필 이미지 경로
           username: "lalala", // 작성자 닉네임
           url: "https://i.pinimg.com/564x/4a/df/79/4adf79a54b55ff828832636d7e3b62c9.jpg", //게시물 이미지 경로
           likeCount: 3,
@@ -48,7 +51,8 @@ export default {
         },
         {
           id: 3,
-          profile: "", //프로필 이미지 경로
+          profile:
+            "https://i.pinimg.com/564x/98/d5/3e/98d53e3014862a543e49c729ba06c4af.jpg", //프로필 이미지 경로
           username: "lalala", // 작성자 닉네임
           url: "https://i.pinimg.com/564x/9d/02/b2/9d02b26580b242a40108589138138e6f.jpg", //게시물 이미지 경로
           likeCount: 8,
