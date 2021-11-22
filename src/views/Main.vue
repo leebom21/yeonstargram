@@ -90,7 +90,7 @@ export default {
   // vue 기본 문법
   // data, computed, methods, props, watch
   created() {
-    this.getPosts();
+    // this.getPosts();
   },
 
   // vue life cycle

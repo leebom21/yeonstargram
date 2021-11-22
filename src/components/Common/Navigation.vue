@@ -1,5 +1,6 @@
 <template>
   <div class="navigation">
+    <img :src="img" />
     <div>
       <button class="home-icon">
         <svg
@@ -69,9 +70,6 @@
           ></path>
         </svg>
       </button>
-
-      <!-- <button @click="writeBtn">첨부</button> -->
-
       <input
         type="file"
         style="display: none"
@@ -111,8 +109,27 @@
 <script>
 export default {
   name: "Navigation",
+  data() {
+    return {
+      img: "",
+    };
+  },
   methods: {
-    yourVueMethod() {
+    yourVueMethod(e) {
+      const file = e.target.files[0];
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = (e) => {
+        this.img = e.target.result;
+      };
+      this.$router.push("/write");
+    },
+    onFilePicked(e) {
+      console.log(e.target.files);
+      console.log(e);
+    },
+    //첨부
+    writeBtn() {
       this.$router.push("/write");
     },
   },

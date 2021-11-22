@@ -1,7 +1,7 @@
 <template>
   <div>
-    <li v-for="(item, i) in list" :key="i" class="feed-item">
-      <!---->
+    <!-- <li v-for="(item, i) in list" :key="i" class="feed-item">
+      
       <div>
         <div>
           <img :src="item.User.profile" />
@@ -16,14 +16,12 @@
       </div>
       <div>
         <div>
-          <!--icon box-->
           <button class="modal">좋d아요</button>
           <button class="modal">댓글</button>
           <button class="modal">쪽지</button>
           <button class="modal">북마크</button>
         </div>
         <div>
-          <!--detail-->
           <p>좋아요 {{ item.like.length }}개</p>
           <p>
             <a href="#none">{{ item.User.username }}</a> {{ item.description }}
@@ -31,7 +29,7 @@
           <span>0일전</span>
         </div>
       </div>
-    </li>
+    </li> -->
 
     <!--api 아닌 데이터로 입력-->
     <li v-for="(item, i) in listData" :key="i" class="feed-item">

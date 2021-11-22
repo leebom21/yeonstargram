@@ -15,10 +15,10 @@
         <div>
           <Input type="text" placeHolder="휴대폰 번호" :value.sync="phone" />
           <Input type="text" placeHolder="이메일" :value.sync="email" />
-          <Input type="text" placeHolder="사용자 이름" :value.sync="password" />
+          <Input type="text" placeHolder="비밀번호" :value.sync="password" />
           <Input
             type="password"
-            placeHolder="비밀번호"
+            placeHolder="사용자 이름"
             :value.sync="username"
           />
 
@@ -52,6 +52,7 @@
 <script>
 import Button from "../components/Button.vue";
 import Input from "../components/Input.vue";
+import axios from "axios";
 export default {
   components: { Input, Button },
   name: "join",
@@ -64,8 +65,19 @@ export default {
     };
   },
   methods: {
-    join() {
-      console.log("join");
+    async join() {
+      const response = await axios.post("/api/account/join", {
+        email: this.email,
+        password: this.password,
+        username: this.username,
+        phone: this.phone,
+      });
+      // 회원가입 성공
+      if (response.status === 200) {
+        this.$router.push("/");
+      } else {
+        // 회원가입 실패
+      }
     },
   },
 };

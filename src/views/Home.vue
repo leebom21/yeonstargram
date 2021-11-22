@@ -89,7 +89,7 @@
 <script>
 import Button from "../components/Button.vue";
 import Input from "../components/Input.vue";
-
+import axios from "axios";
 export default {
   name: "Home",
   components: {
@@ -105,6 +105,16 @@ export default {
   methods: {
     login() {
       this.$router.push("/main");
+    },
+    async login1() {
+      const response = await axios.post("/api/account/login", {
+        email: this.id,
+        password: this.pw,
+      });
+      //console.log(response);
+      if (response.status === 200) {
+        this.$router.push("/main");
+      }
     },
   },
 };
