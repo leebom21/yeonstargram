@@ -1,8 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import store from "../store";
 
 Vue.use(VueRouter);
+const auth = true;
 
 const routes = [
   {
@@ -23,6 +25,7 @@ const routes = [
       {
         path: "",
         name: "List",
+        meta: { auth },
         component: () => import("../views/Main.vue"),
       },
     ],
@@ -30,6 +33,7 @@ const routes = [
   {
     path: "/write",
     name: "Write",
+    meta: { auth },
     component: () => import("../views/Write.vue"),
   },
 ];
@@ -38,6 +42,19 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach(async (to, from, next) => {
+  if (to.meta.auth && !store.state.loggedIn) {
+    await store.dispatch("getUserInfo");
+    if (store.state.loggedIn) {
+      next();
+    } else {
+      router.replace("/");
+    }
+  } else {
+    next();
+  }
 });
 
 export default router;

@@ -1,6 +1,11 @@
 <template>
   <ul class="feed-list">
-    <FeedListItem :list="list" :listData="listData" />
+    <FeedListItem
+      v-for="(item, i) in list"
+      :item="item"
+      :key="i"
+      @like="$emit('like', $event)"
+    />
   </ul>
 </template>
 
@@ -8,7 +13,7 @@
 import FeedListItem from "./FeedListItem.vue";
 export default {
   name: "FeedList",
-  props: ["list", "listData"],
+  props: ["list"],
   components: { FeedListItem },
 };
 </script>

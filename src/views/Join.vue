@@ -66,6 +66,7 @@ export default {
   },
   methods: {
     async join() {
+      // console.log("hi");
       const response = await axios.post("/api/account/join", {
         email: this.email,
         password: this.password,

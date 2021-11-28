@@ -83,9 +83,9 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import Button from "../components/Button.vue";
 import Input from "../components/Input.vue";
-import axios from "axios";
 export default {
   name: "Home",
   components: {
@@ -100,25 +100,19 @@ export default {
   },
   methods: {
     async login() {
-      const response = await axios.post("/api/account/login", {
-        email: this.id,
-        password: this.pw,
+      await this.$store.dispatch("login", {
+        id: this.id,
+        pw: this.pw,
       });
-      //console.log(response);
-      if (response.status === 200) {
+
+      // 로그인 성공
+      if (this.loggedIn) {
         this.$router.push("/main");
-      } else {
-        if (this.$store.state.user.email !== response.email) {
-          alert("메일을 다시 확인해주세요");
-          return false;
-        } else {
-          if (this.$store.state.user.password !== response.password) {
-            alert("비밀번호를 다시 확인해주세요");
-            return false;
-          }
-        }
       }
     },
+  },
+  computed: {
+    ...mapState(["loggedIn"]),
   },
 };
 </script>

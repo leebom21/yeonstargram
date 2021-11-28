@@ -10,7 +10,22 @@
     </SubHeader>
     <template v-if="step === 1">
       <div class="frame-box">
-        <img :src="$store.state.uploadImg" align="center" />
+        <img :src="$store.state.img.src" align="center" :class="[filter]" />
+      </div>
+      <!--filter-->
+      <div class="filter-box">
+        <div>
+          <div>
+            <template v-for="(filterItem, index) in filters">
+              <button :key="index" @click="filter = filterItem">
+                <p>{{ filterItem }}</p>
+                <div>
+                  <img :src="$store.state.img.src" :class="[filterItem]" />
+                </div>
+              </button>
+            </template>
+          </div>
+        </div>
       </div>
     </template>
     <template v-if="step === 2">
@@ -20,22 +35,14 @@
             <img :src="$store.state.user.userImage" />
           </div>
           <div class="write-text">
-            <textarea placeholder="문구입력..."></textarea>
+            <textarea
+              placeholder="문구입력..."
+              v-model="description"
+            ></textarea>
           </div>
           <div class="upload-image">
-            <img :src="$store.state.uploadImg" align="center" />
+            <img :src="$store.state.img.src" align="center" :class="[filter]" />
           </div>
-        </div>
-        <!--위치 추가--->
-        <div>
-          <p>위치 추가</p>
-          <span> &gt; </span>
-        </div>
-
-        <!--사람태그하기 --->
-        <div>
-          <p>사람 태그하기</p>
-          <span> &gt; </span>
         </div>
       </div>
     </template>
@@ -45,7 +52,7 @@
 <script>
 import Icon from "../components/Common/Icon.vue";
 import SubHeader from "../components/Common/SubHeader.vue";
-//import axios from "axios";
+import axios from "axios";
 
 export default {
   name: "Write",
@@ -57,6 +64,28 @@ export default {
       tag: "",
       writer: "",
       photo: "",
+      filter: "",
+      filters: [
+        "normal",
+        "clarendon",
+        "gingham",
+        "moon",
+        "lark",
+        "reyes",
+        "juno",
+        "slumber",
+        "aden",
+        "perpetua",
+        "mayfair",
+        "rise",
+        "hudson",
+        "valencia",
+        "xpro2",
+        "willow",
+        "lofi",
+        "inkwell",
+        "nashville",
+      ],
     };
   },
   methods: {
@@ -67,21 +96,39 @@ export default {
         this.step = 1;
       }
     },
-    rightBtnAction() {
+    async uploadImage() {
+      const formData = new FormData();
+      const file = this.$store.state.img.file;
+      formData.append("url", file, file.name);
+      formData.append("filter", this.filter);
+
+      const response = await axios.post("/api/photo", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      return response.data.id;
+    },
+    async rightBtnAction() {
       if (this.step === 1) {
         this.step = 2;
       } else {
-        //api 호출
-        // const response = await axios.post("/api/board/write", {
-        //   description,
-        //   tag,
-        //   writer: this.$store.state.user.id,
-        //   photo: data.id,
-        // });
-        // if (response.status === 200) {
-        //   this.$router.push("main");
-        // } else {
-        // }
+        const photo = await this.uploadImage();
+
+        // api 호출
+        const response = await axios.post("/api/board/write", {
+          description: this.description,
+          tag: this.tag,
+          writer: this.$store.state.user.id,
+          photo,
+        });
+
+        if (response.status === 200) {
+          this.$router.push("main");
+        } else {
+          console.log(response);
+        }
       }
     },
   },
@@ -125,6 +172,40 @@ export default {
       //width: 100%;
       min-height: 453px;
       height: 100%;
+    }
+  }
+
+  .filter-box {
+    & > div {
+      overflow: hidden;
+      & > div {
+        overflow: hidden;
+        display: flex;
+        width: 100%;
+        overflow-x: scroll;
+        padding: 10px 10px 0 10px;
+        background: #fff;
+        button {
+          flex: 1;
+          min-width: 120px;
+          max-width: 120px;
+          width: 106px;
+          height: 140px;
+          border: none;
+          background: #fff;
+
+          & > div {
+            overflow: hidden;
+            img {
+              // width: 106px;
+              height: 106px;
+            }
+          }
+          p {
+            margin: 7px 0 11px;
+          }
+        }
+      }
     }
   }
   .write-feed {
