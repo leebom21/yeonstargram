@@ -36,6 +36,19 @@ const routes = [
     meta: { auth },
     component: () => import("../views/Write.vue"),
   },
+  {
+    path: "/mypage",
+    name: "Mypage",
+    component: () => import("../components/Common/LayoutNav.vue"),
+    children: [
+      {
+        path: "",
+        name: "mypage",
+        meta: { auth },
+        component: () => import("../views/Mypage.vue"),
+      },
+    ],
+  },
 ];
 
 const router = new VueRouter({

@@ -1,7 +1,7 @@
 <template>
   <div class="navigation">
     <div>
-      <button class="home-icon">
+      <button class="home-icon" @click="$router.push('/main')">
         <Icon name="home" />
       </button>
     </div>
@@ -35,9 +35,11 @@
       </button>
     </div>
     <div class="mypage">
-      <button>
-        <div>
-          <img :src="$store.state.user.userImage" alt="myprofile" />
+      <button @click="$router.push('/mypage')">
+        <div class="line">
+          <div>
+            <img :src="$store.state.user.userImage" alt="myprofile" />
+          </div>
         </div>
       </button>
     </div>
@@ -105,14 +107,24 @@ export default {
 
   .mypage {
     button {
-      div {
-        width: 24px;
-        height: 24px;
+      .line {
+        border: 1px solid rgba(var(--i1d, 255, 255, 255), 1);
         border-radius: 50%;
-        overflow: hidden;
+        height: 28px;
+        position: absolute;
+        width: 28px;
+        top: 7px;
+        right: 26px;
+        div {
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          overflow: hidden;
+          margin: 2px;
 
-        img {
-          width: 100%;
+          img {
+            width: 100%;
+          }
         }
       }
     }
