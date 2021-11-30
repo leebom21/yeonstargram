@@ -53,7 +53,26 @@
                   </div>
                   <h1>사진 공유</h1>
                   <p>사진을 공유하면 회원님의 프로필에 표시됩니다.</p>
-                  <button>첫 사진 공유하기</button>
+                  <input
+                    id="fileInput"
+                    type="file"
+                    style="display: none"
+                    ref="fileUpload"
+                    @change="yourVueMethod"
+                  />
+                  <button
+                    id="fileInputButton"
+                    @click="$refs.fileUpload.click()"
+                  >
+                    첫 사진 공유하기
+                  </button>
+                  <input
+                    type="file"
+                    style="display: none"
+                    ref="fileInput"
+                    accept="image/*"
+                    @change="onFilePicked"
+                  />
                 </div>
               </template>
             </div>
@@ -132,6 +151,23 @@ export default {
       } else {
         console.log("d");
       }
+    },
+    yourVueMethod(e) {
+      const file = e.target.files[0];
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = (e) => {
+        this.img = e.target.result;
+
+        this.$store.dispatch("getUploadImg", {
+          file,
+          src: this.img,
+        });
+      };
+      this.$router.push("/write");
+    },
+    onFilePicked(e) {
+      console.log(e);
     },
   },
   computed: {
