@@ -37,6 +37,12 @@ const routes = [
     component: () => import("../views/Write.vue"),
   },
   {
+    path: "/imageUpload",
+    name: "ImageUpload",
+    meta: { auth },
+    component: () => import("../views/ImageUpload.vue"),
+  },
+  {
     path: "/mypage",
     name: "Mypage",
     component: () => import("../components/Common/LayoutNav.vue"),

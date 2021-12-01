@@ -2,7 +2,7 @@
   <li class="feed-item">
     <div>
       <div>
-        <img :src="item.src" />
+        <img :src="$store.state.user.userImage" />
       </div>
       <div>
         <a href="#none"> {{ item.User.username }}</a>

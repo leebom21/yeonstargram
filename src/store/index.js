@@ -15,8 +15,9 @@ export default new Vuex.Store({
       password: "",
       username: "",
       profile: "",
-      userImage:
-        "https://i.pinimg.com/564x/48/ff/92/48ff924e72e235ddbe1865ff54e21152.jpg",
+      userImage: "",
+      nickname: "",
+      intro: "",
     },
     img: {
       src: "",
@@ -31,6 +32,10 @@ export default new Vuex.Store({
       state.img.src = payload.src;
       state.img.file = payload.file;
     },
+    setUpdate(state, payload) {
+      state.user.profile = payload.file;
+      state.user.userImage = payload.src;
+    },
     setLogin(state, payload) {
       state.user.id = payload.id;
       state.user.email = payload.email;
@@ -44,6 +49,11 @@ export default new Vuex.Store({
     //#3 받은 값을 변수에 담아서 머테이션 값을 호출
     getUploadImg(store, payload) {
       store.commit("setUpload", payload);
+    },
+
+    //프로필 이미지 업데이트
+    getImgUpdate(store, payload) {
+      store.commit("setUpdate", payload);
     },
     async login(store, payload) {
       let response = null;

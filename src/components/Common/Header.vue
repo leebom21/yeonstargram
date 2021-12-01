@@ -39,6 +39,7 @@ export default {
   top: 0;
   width: 420px;
   background: #fff;
+  z-index: 2;
 
   button {
     border: none;

@@ -90,7 +90,7 @@
           </div>
           <div class="profile-change">
             <p>{{ $store.state.user.username }}</p>
-            <button>프로필 사진 바꾸기</button>
+            <button @click="isModal = true">프로필 사진 바꾸기</button>
           </div>
         </div>
         <div>
@@ -111,6 +111,9 @@
         </div>
 
         <button class="submit">제출</button>
+
+        <!--modal-->
+        <Modal v-if="isModal" @close-modal="isModal = false" />
       </div>
     </template>
     <!--팔로워-->
@@ -133,17 +136,19 @@ import Icon from "../components/Common/Icon.vue";
 import EditInput from "../components/EditInput.vue";
 import SubHeader from "../components/Common/SubHeader.vue";
 import FollowList from "../components/FollowList.vue";
+import Modal from "../components/Modal.vue";
 
 export default {
   name: "Mypage",
   data() {
     return {
+      isModal: false,
       step: 1,
       currentTab: 0,
       tabs: ["", "", "", ""],
     };
   },
-  components: { SubHeader, Icon, EditInput, FollowList },
+  components: { SubHeader, Icon, EditInput, FollowList, Modal },
   methods: {
     leftBtnAction() {
       if (this.step === 2 || this.step === 3 || this.step === 4) {
@@ -224,14 +229,17 @@ export default {
     padding: 15px;
     display: flex;
     .profile-img {
+      display: inline-block;
       margin-right: 20px;
       height: 80px;
-      max-width: 80px;
+      width: 80px;
       border-radius: 64px;
       overflow: hidden;
+      background: #e3e3e3;
 
       img {
-        width: 100%;
+        // width: 100%;
+        height: 100%;
       }
     }
     .profile-edit {
@@ -390,9 +398,12 @@ export default {
           height: 40px;
           border-radius: 30px;
           overflow: hidden;
+          display: inline-block;
+          background: #ddd;
 
           img {
-            width: 100%;
+            // width: 100%;
+            height: 100%;
           }
         }
         .profile-change {

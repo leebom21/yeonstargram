@@ -7,8 +7,8 @@
       <div class="list">
         <div>
           <p>
-            {{ item.username
-            }}<button v-show="item.follow === 'N' && this.step === 3">
+            {{ item.username }}
+            <button v-show="item.follow === 'N' && this.step === 3">
               팔로우
             </button>
             <span>{{ item.name }}</span>
@@ -50,6 +50,7 @@ li {
     height: 30px;
     overflow: hidden;
     border-radius: 30px;
+    background: #ddd;
 
     img {
       width: 100%;
