@@ -8,7 +8,10 @@
         <div>
           <p>
             {{ item.username }}
-            <button v-show="item.follow === 'N' && this.step === 3">
+            <button
+              v-show="item.follow === 'N' && this.step === 3"
+              @click="$emit('follow')"
+            >
               팔로우
             </button>
             <span>{{ item.name }}</span>
@@ -23,7 +26,7 @@
 <script>
 export default {
   name: "FollowListItem",
-  props: ["item", "step"],
+  props: ["item", "step", "followInfo"],
   computed: {
     test() {
       if (this.step === 3) {

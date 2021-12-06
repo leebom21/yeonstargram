@@ -21,7 +21,7 @@
       <div class="introduction">소개글/..</div>
       <div class="count">
         <button>게시물<span>0</span></button>
-        <button @click="step = 3">팔로워<span>0</span></button>
+        <button @click="loadData">팔로워<span>0</span></button>
 
         <button @click="step = 4">팔로우<span>0</span></button>
       </div>
@@ -45,7 +45,7 @@
           </div>
           <div class="tab-content">
             <div v-show="currentTab === 0" class="align-center">
-              <!--length가 0일때-->
+              <!--length가 0 일때-->
               <template>
                 <div class="empty">
                   <div>
@@ -75,6 +75,9 @@
                   />
                 </div>
               </template>
+
+              <!---1번 프레임--->
+              <MosaicType />
             </div>
             <div v-show="currentTab === 1">22222</div>
           </div>
@@ -119,7 +122,7 @@
     <!--팔로워-->
     <template v-if="step === 3">
       <div>
-        <FollowList :step="step" />
+        <FollowList :step="step" :followInfo="followInfo" @follow="follow" />
       </div>
     </template>
     <!--팔로우-->
@@ -137,6 +140,8 @@ import EditInput from "../components/EditInput.vue";
 import SubHeader from "../components/Common/SubHeader.vue";
 import FollowList from "../components/FollowList.vue";
 import Modal from "../components/Modal.vue";
+import MosaicType from "../components/MosaicType.vue";
+import axios from "axios";
 
 export default {
   name: "Mypage",
@@ -145,11 +150,15 @@ export default {
       isModal: false,
       step: 1,
       currentTab: 0,
-      tabs: ["", "", "", ""],
+      tabs: ["", ""],
+      followInfo: [],
     };
   },
-  components: { SubHeader, Icon, EditInput, FollowList, Modal },
+  components: { SubHeader, Icon, EditInput, FollowList, Modal, MosaicType },
   methods: {
+    rightBtnAction() {
+      console.log("hi");
+    },
     leftBtnAction() {
       if (this.step === 2 || this.step === 3 || this.step === 4) {
         this.step = 1;
@@ -173,6 +182,31 @@ export default {
     },
     onFilePicked(e) {
       console.log(e);
+    },
+    // 팔로우 추가
+    async follow() {
+      console.log("d");
+      const response = await axios.post(
+        `/api/account/follow/${this.$store.state.user.id}`,
+        {
+          from: this.$store.state.user.id,
+          to: this.userId,
+        }
+      );
+      if (response.status === 200) {
+        alert("팔로우가 완료됐습니다 !");
+        this.loadData();
+      }
+    },
+
+    //팔로우 리스트 로드
+    async loadData() {
+      this.step = 3;
+      const response = await axios.get(`/api/account/follow/${this.userId}`);
+
+      if (response.status === 200) {
+        this.followInfo = response.data;
+      }
     },
   },
   computed: {

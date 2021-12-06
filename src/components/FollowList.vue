@@ -6,6 +6,8 @@
         :key="i"
         :item="item"
         :step="step"
+        :followInfo="followInfo"
+        @click="$emit('follow')"
       />
     </ul>
   </div>
@@ -16,7 +18,7 @@ import FollowListItem from "../components/FollowListItem.vue";
 export default {
   name: "FollowList",
   components: { FollowListItem },
-  props: ["step"],
+  props: ["step", "followList"],
   data() {
     return {
       List: [
@@ -58,6 +60,7 @@ export default {
       ],
     };
   },
+  methods: {},
 };
 </script>
 
